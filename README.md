@@ -1,6 +1,8 @@
 # Deej Volume Mixer
 This repository contains my implementation for the Deej Volume mixer that I created. It's a 5 channel mixer with RGB LED strips.
 
+![Mixer](https://i.ibb.co/C0q6cFZ/1.jpg)
+
 You can check out the models here: https://makerworld.com/en/models/419682#profileId-322350
 
 # Software
