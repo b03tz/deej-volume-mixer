@@ -3,7 +3,8 @@ This repository contains my implementation for the Deej Volume mixer that I crea
 
 ![Mixer](https://i.ibb.co/C0q6cFZ/1.jpg)
 
-You can check out the models here: https://makerworld.com/en/models/419682#profileId-322350
+* Here's a making-off video: https://www.youtube.com/watch?v=anTwEfMaGJQ
+* You can check out the models here: https://makerworld.com/en/models/419682#profileId-322350
 
 # Software
 I'm running this on an Arduino Nano3 with the sliders connected to A0, A1, A2, A3, A4 and the LED data strips connected to pin 6, 5, 4, 3 and 2.
