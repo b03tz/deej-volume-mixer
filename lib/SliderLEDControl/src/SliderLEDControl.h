@@ -27,9 +27,15 @@ private:
     int animationFrame = 0;
     int direction = false;
     Adafruit_NeoPixel strip;
+    bool wasLastZero = false;
+    unsigned long zeroVolumeTimes[2] = {0, 0};
 
 public:
     SliderLEDControl(int sensorPin, int dataPin, bool debug = false);
+
+    void updateZeroVolumeTimes();
+    bool checkForDoubleZero();
+    void setBrightness(int brightness);
 
     void setColors(
             int r1, int g1, int b1,

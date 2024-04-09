@@ -108,3 +108,40 @@ void SliderLEDControl::showLights(int value) {
 
     strip.show();
 }
+
+void SliderLEDControl::updateZeroVolumeTimes() {
+    zeroVolumeTimes[0] = zeroVolumeTimes[1]; // Move the older timestamp back
+    zeroVolumeTimes[1] = millis(); // Update the latest timestamp to now
+}
+
+bool SliderLEDControl::checkForDoubleZero() {
+    int sensorValue = averageValue;
+
+    // Check if the current reading is zero
+    if (sensorValue == 0) {
+        if (!wasLastZero) { // If the last reading wasn't zero, consider this a new "zero volume" event
+            updateZeroVolumeTimes(); // Update the zeroVolumeTimes array
+            wasLastZero = true; // Set the flag since we've now seen a zero
+        }
+    } else if (sensorValue > 10) {
+        wasLastZero = false; // Reset the flag since we have a non-zero reading
+    }
+
+    // Check if two "zero volume" events occurred within the last 1 second
+    if (zeroVolumeTimes[0] > 0 && // Ensure a zero event has been recorded
+        zeroVolumeTimes[1] - zeroVolumeTimes[0] <= 1000) { // 1000 milliseconds = 1 second
+
+        // Reset it
+        zeroVolumeTimes[0] = 0;
+        zeroVolumeTimes[1] = 0;
+
+        return true; // Detected two zero volume events within 1 second
+    }
+
+    return false; // No double zero volume detected
+}
+
+void SliderLEDControl::setBrightness(int newValue) {
+    this->brightness = newValue;
+    strip.setBrightness(this->brightness);
+}
